@@ -18,7 +18,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun HomeScreen(prayers: List<Prayer>, modifier: Modifier = Modifier) {
+fun HomeScreen(
+    prayers: List<Prayer>,
+    prayerTimes: PrayerTimesUiState,
+    onRefreshPrayerTimes: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Column(
         modifier
             .verticalScroll(rememberScrollState())
@@ -28,6 +33,8 @@ fun HomeScreen(prayers: List<Prayer>, modifier: Modifier = Modifier) {
         Text("Today's prayer times", style = MaterialTheme.typography.bodyMedium)
         Spacer(Modifier.height(16.dp))
         prayers.forEach { prayer -> PrayerCard(prayer) }
+        Spacer(Modifier.height(24.dp))
+        PrayerTimesSection(state = prayerTimes, onRefresh = onRefreshPrayerTimes)
     }
 }
 
